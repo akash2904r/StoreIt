@@ -5,6 +5,7 @@ import { convertFileSize } from "@/lib/utils";
 
 import Thumbnail from "@/components/Thumbnail";
 import FormattedDateTime from "@/components/FormattedDateTime";
+import ActionsDropdown from "@/components/ActionsDropdown";
 
 export default function Card({ file }: { file: Models.Document }) {
     return (
@@ -18,9 +19,8 @@ export default function Card({ file }: { file: Models.Document }) {
                     imageClassName="!size-11" 
                 />
 
-
                 <div className="flex flex-col items-end justify-between">
-                    {/* <ActionsDropdown /> */}
+                    <ActionsDropdown file={file} />
 
                     <p className="body-1">{convertFileSize(file.size)}</p>
                 </div>
@@ -31,8 +31,6 @@ export default function Card({ file }: { file: Models.Document }) {
                 <FormattedDateTime date={file.$createdAt} className="body-2 text-light-100" />
                 <p className="caption line-clamp-1 text-light-200">By: {file.owner.fullName}</p>
             </div>
-
-            {file.name}
         </Link>
     );
 }
