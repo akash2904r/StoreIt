@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 
 import { actionsDropdownItems } from "@/constants";
 import { constructDownloadUrl } from "@/lib/utils";
-import { renameFile, updateFileUsers } from "@/lib/actions/file.action";
+import { deleteFile, renameFile, updateFileUsers } from "@/lib/actions/file.action";
 
 import {
     Dialog,
@@ -55,7 +55,7 @@ export default function ActionsDropdown({ file }: { file: Models.Document }) {
         const actions = {
             rename: () => renameFile({ fileId: file.$id, name, extension: file.extension, path }),
             share: () => updateFileUsers({ fileId: file.$id, emails, path }),
-            delete: () => console.log("delete"),
+            delete: () => deleteFile({ fileId: file.$id, path, bucketFileId: file.bucketFileId }),
         };
 
         success = await actions[action.value as keyof typeof actions]();
